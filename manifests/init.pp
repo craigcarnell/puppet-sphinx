@@ -9,7 +9,8 @@ class sphinx(
   $listen_ip = undef,
   $listen_port = undef,
   $config_file = undef,
-  $indexer_mem_limit = '32M'
+  $indexer_mem_limit = '32M',
+  $base_path = '/var/lib/sphinx/magento/'
 ) inherits sphinx::params {
 
   contain sphinx::install

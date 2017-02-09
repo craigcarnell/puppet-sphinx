@@ -12,4 +12,11 @@ class sphinx::config(
       notify  => Class['sphinx::service']
     }
   }
+
+  if($base_path) {
+    file { $base_path:
+      owner   => 'sphinx',
+      recurse => true
+    }
+  }
 }
