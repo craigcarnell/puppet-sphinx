@@ -3,9 +3,9 @@ class sphinx(
 
   contain sphinx::install
   contain sphinx::config
-  #contain sphinx::service
+  contain sphinx::service
 
   Class['::sphinx::install'] ->
-    Class['::sphinx::config'] # ~>
-  #Class['::sphinx::service']
+    Class['::sphinx::config'] ~>
+    Class['::sphinx::service']
 }
