@@ -33,7 +33,7 @@ class sphinx::install {
       # cd /tmp
       # wget http://sphinxsearch.com/files/sphinx-2.2.11-1.rhel7.x86_64.rpm
       wget::fetch { "sphinx":
-        source      => 'sphinx-2.2.11-1.rhel7.x86_64.rpm',
+        source      => 'http://sphinxsearch.com/files/sphinx-2.2.11-1.rhel7.x86_64.rpm',
         destination => '/tmp/',
         timeout     => 0,
         verbose     => false
