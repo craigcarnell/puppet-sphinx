@@ -7,7 +7,7 @@ class sphinx(
   $sql_pass   = undef,
   $sql_db     = undef,
   $listen_ip = undef,
-  $listen_post = undef,
+  $listen_port = undef,
   $config_file = undef,
   $indexer_mem_limit = '32M'
 ) inherits sphinx::params {
