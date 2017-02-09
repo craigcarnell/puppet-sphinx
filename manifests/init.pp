@@ -1,4 +1,6 @@
 class sphinx(
+  $centos_package = $sphinx::params::centos_package,
+  $ubuntu_ppa = $sphinx::params::ubuntu_ppa
 ) inherits sphinx::params {
 
   contain sphinx::install

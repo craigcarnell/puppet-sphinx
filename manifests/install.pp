@@ -14,11 +14,11 @@ class sphinx::install {
         ensure => installed
       }
 
-      apt::ppa { 'ppa:builds/sphinxsearch-rel22': }
+      apt::ppa { $sphinx::ubuntu_ppa: }
 
       package { ["sphinxsearch"]:
         ensure => installed,
-        require => Apt::Ppa['ppa:builds/sphinxsearch-rel22']
+        require => Apt::Ppa[$sphinx::ubuntu_ppa]
       }
     }
     centos,fedora,rhel: {
@@ -30,17 +30,15 @@ class sphinx::install {
         ensure   => 'installed'
       }
 
-      # cd /tmp
-      # wget http://sphinxsearch.com/files/sphinx-2.2.11-1.rhel7.x86_64.rpm
       wget::fetch { "sphinx":
-        source      => 'http://sphinxsearch.com/files/sphinx-2.2.11-1.rhel7.x86_64.rpm',
-        destination => '/tmp/sphinx-2.2.11-1.rhel7.x86_64.rpm',
+        source      => "http://sphinxsearch.com/files/$sphinx::centos_package",
+        destination => "/tmp/$sphinx::centos_package",
         timeout     => 0,
         verbose     => false
       }
 
       exec {"install-sphinx" :
-        command => "/usr/bin/rpm -Uhv /tmp/sphinx-2.2.11-1.rhel7.x86_64.rpm",
+        command => "/usr/bin/rpm -Uhv /tmp/$sphinx::centos_package",
         creates => '/usr/bin/searchd',
         require => [ Wget::Fetch["sphinx"], Package["postgresql-libs"], Package["unixODBC"] ]
       }
