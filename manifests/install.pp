@@ -41,7 +41,8 @@ class sphinx::install {
 
       exec {"install-sphinx" :
         command => "/usr/bin/rpm -Uhv /tmp/sphinx-2.2.11-1.rhel7.x86_64.rpm",
-        creates => '/usr/bin/searchd'
+        creates => '/usr/bin/searchd',
+        require => [ Wget::Fetch["sphinx"], Package["postgresql-libs"], Package["unixODBC"] ]
       }
     }
   }
