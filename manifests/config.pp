@@ -2,13 +2,13 @@ class sphinx::config(
 
 ) inherits sphinx {
 
-  if($config_file) {
-    file { $sphinx_config_file:
+  if($config_template) {
+    file { "${config_path}/sphinx_${listen_port}.conf":
       ensure => present,
       mode   => '0644',
       owner  => 'root',
       group  => 'root',
-      content => template($config_file),
+      content => template($config_template),
       notify  => Class['sphinx::service']
     }
   }

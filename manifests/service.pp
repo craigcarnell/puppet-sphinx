@@ -8,6 +8,13 @@ class sphinx::service {
       }
     }
     centos,fedora,rhel: {
+      file { '/usr/lib/systemd/system/searchd.service':
+        ensure  => 'file',
+        owner   => 'root',
+        group   => 'root',
+        content => template("${module_name}/usr/lib/systemd/system/searchd.service.erb")
+      }
+
       service { 'searchd':
         ensure => running,
         enable => true

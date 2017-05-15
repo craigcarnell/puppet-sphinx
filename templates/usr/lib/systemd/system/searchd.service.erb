@@ -1,0 +1,25 @@
+[Unit]
+Description=SphinxSearch Search Engine
+After=network.target remote-fs.target nss-lookup.target
+After=syslog.target
+
+[Service]
+Type=forking
+User=sphinx
+Group=sphinx
+# Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/run/sphinx
+ExecStartPre=/bin/chown sphinx.sphinx /var/run/sphinx
+# Run ExecStart with User=sphinx / Group=sphinx
+ExecStart=/usr/bin/searchd --config /etc/sphinx/sphinx_<%= @listen_port %>.conf
+KillMode=process
+KillSignal=SIGTERM
+SendSIGKILL=no
+LimitNOFILE=infinity
+PIDFile=/var/run/sphinx/searchd_<%= @listen_port %>.pid
+
+[Install]
+WantedBy=multi-user.target
+Alias=sphinx.service
+Alias=sphinxsearch.service
