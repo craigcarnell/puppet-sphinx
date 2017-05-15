@@ -13,7 +13,7 @@ class sphinx::config(
     }
   }
 
-  file { "${base_path}_${listen_port}":
+  file { "${base_path}/${listen_port}":
     owner   => 'sphinx',
     recurse => true
   }

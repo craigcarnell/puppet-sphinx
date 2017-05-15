@@ -10,7 +10,7 @@ source src1
 	sql_user		= test
 	sql_pass		=
 	sql_db			= test
-	sql_port		= <%= @port_mysql41 %>	# optional, default is 3306
+	sql_port		= <%= @listen_port_mysql41 %>	# optional, default is 3306
 
 	sql_query		= \
 		SELECT id, group_id, UNIX_TIMESTAMP(date_added) AS date_added, title, content \
@@ -24,7 +24,7 @@ source src1
 index test1
 {
 	source			= src1
-	path			= /var/lib/sphinx_<%= @port %>/test1
+	path			= <%= @base_path %><%= @listen_port %>/test1
 }
 
 
@@ -33,7 +33,7 @@ index testrt
 	type			= rt
 	rt_mem_limit	= 128M
 
-	path			= /var/lib/sphinx_<%= @port %>/testrt
+	path			= <%= @base_path %><%= @listen_port %>/testrt
 
 	rt_field		= title
 	rt_field		= content
@@ -51,14 +51,14 @@ searchd
 {
 	listen			= <%= @listen_port %>
 	listen			= <%= @listen_port_mysql41 %>:mysql41
-	log			    = /var/log/sphinx/searchd_<%= @port %>.log
-	query_log		= /var/log/sphinx/query_<%= @port %>.log
+	log			    = /var/log/sphinx/searchd_<%= @listen_port %>.log
+	query_log		= /var/log/sphinx/query_<%= @listen_port %>.log
 	read_timeout	= 5
 	max_children	= 30
-	pid_file		= /var/run/sphinx/searchd_<%= @port %>.pid
+	pid_file		= /var/run/sphinx/searchd_<%= @listen_port %>.pid
 	seamless_rotate	= 1
 	preopen_indexes	= 1
 	unlink_old		= 1
 	workers			= threads # for RT to work
-	binlog_path		= /var/lib/sphinx_<%= @port %>/
+	binlog_path		= <%= @base_path %><%= @listen_port %>/
 }
