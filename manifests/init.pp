@@ -9,9 +9,12 @@ class sphinx(
   $listen_ip = undef,
   $listen_port = undef,
   $config_file = undef,
-  $indexer_mem_limit = '32M',
-  $base_path = '/var/lib/sphinx',
-  $binlog_path = '/var/lib/sphinx'
+  $base_path = '/var/lib/sphinx_9312',
+  $binlog_path = '/var/lib/sphinx_9312',
+  $port = $sphinx::params::port,
+  $port_mysql41 = $sphinx::params::port_mysql41,
+  $indexer_mem_limit = $sphinx::params::indexer_mem_limit,
+
 ) inherits sphinx::params {
 
   contain sphinx::install
