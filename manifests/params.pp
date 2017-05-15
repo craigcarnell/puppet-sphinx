@@ -3,6 +3,8 @@ class sphinx::params() {
   $ubuntu_ppa = "ppa:builds/sphinxsearch-rel22"
   $sphinx_config_file = "/etc/sphinx/sphinx.conf"
 
+  $base_path = '/var/lib'
+
   $port = 9312
   $port_mysql41 = 9306
 

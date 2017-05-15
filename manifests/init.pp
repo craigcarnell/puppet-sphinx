@@ -6,6 +6,7 @@ class sphinx(
   $sql_user   = undef,
   $sql_pass   = undef,
   $sql_db     = undef,
+  $base_path  = $sphinx::params::base_path
   $listen_ip = undef,
   $listen_port = $sphinx::params::port,
   $config_file = undef,
