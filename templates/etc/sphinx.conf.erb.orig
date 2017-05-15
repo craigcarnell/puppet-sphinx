@@ -49,8 +49,8 @@ indexer
 
 searchd
 {
-	listen			= <%= @port %>
-	listen			= <%= @port_mysql41 %>:mysql41
+	listen			= <%= @listen_port %>
+	listen			= <%= @listen_port_mysql41 %>:mysql41
 	log			    = /var/log/sphinx/searchd_<%= @port %>.log
 	query_log		= /var/log/sphinx/query_<%= @port %>.log
 	read_timeout	= 5
